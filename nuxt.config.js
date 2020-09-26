@@ -1,8 +1,12 @@
+import fs from 'fs';
+import { join } from 'path';
+
+const HTTPS_KEY = join(__dirname, 'credentials/ca.key');
+const HTTPS_CERT = join(__dirname, 'credentials/ca.cert');
+
 export default {
-  // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
 
-  // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'netlify-cms',
     meta: [
@@ -13,21 +17,29 @@ export default {
     link: [ { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' } ],
   },
 
-  // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
+  server: {
+    https:
+      process.env.NODE_ENV === 'development' ?
+        {
+          /* eslint-disable no-sync */
+          key: fs.readFileSync(HTTPS_KEY, 'ascii'),
+          cert: fs.readFileSync(HTTPS_CERT, 'ascii'),
+          /* eslint-enable no-sync */
+        } :
+        null,
+  },
 
-  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
-
-  // Auto import components (https://go.nuxtjs.dev/config-components)
-  components: true,
-
-  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: [],
-
-  // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: [],
-
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+        });
+      }
+    },
+  },
 };
