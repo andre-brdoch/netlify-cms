@@ -1,10 +1,39 @@
 <template>
   <div>
+    <nav class="nav">
+      <ul class="list">
+        <li>
+          <nuxt-link class="navlink" to="/">
+            Home
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link class="navlink" to="/admin">
+            Edit Content
+          </nuxt-link>
+        </li>
+      </ul>
+    </nav>
     <Nuxt />
   </div>
 </template>
 
 <style>
+.nav {
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+}
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 30px;
+  justify-content: start;
+}
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;

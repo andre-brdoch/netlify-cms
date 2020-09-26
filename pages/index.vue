@@ -12,7 +12,9 @@
         <h2 class="heading">
           {{ article.title }}
         </h2>
-        <img class="img" :src="article.thumbnail" :alt="article.title">
+        <div
+          class="img"
+          :style="`background-image: url('${article.thumbnail}');`" />
       </nuxt-link>
     </div>
   </div>
@@ -60,5 +62,11 @@ export default {
 .img {
   max-width: 100%;
   width: 100%;
+  background: center center / cover no-repeat;
+  &:after {
+    content: '';
+    display: block;
+    padding-top: 55%;
+  }
 }
 </style>

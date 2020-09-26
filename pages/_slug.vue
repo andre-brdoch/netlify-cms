@@ -1,8 +1,5 @@
 <template>
   <div class="container">
-    <nuxt-link to="/" class="link">
-      Back to home
-    </nuxt-link>
     <h1 class="heading">
       {{ item.title }}
     </h1>
