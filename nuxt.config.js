@@ -29,6 +29,10 @@ export default {
         null,
   },
 
+  modules: [ '@nuxt/content' ],
+
+  content: { dir: '_posts' },
+
   build: {
     extend(config, ctx) {
       // Run ESLint on save

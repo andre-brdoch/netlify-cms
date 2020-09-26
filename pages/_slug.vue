@@ -1,31 +1,21 @@
 <template>
   <div class="container">
+    <nuxt-link to="/" class="link">
+      Back to home
+    </nuxt-link>
     <h1 class="heading">
-      articles
+      {{ item.title }}
     </h1>
-    <div class="grid">
-      <nuxt-link
-        v-for="article in articles"
-        :key="article.slug"
-        :to="article.slug"
-        class="card">
-        <h2 class="heading">
-          {{ article.title }}
-        </h2>
-        <img class="img" :src="article.thumbnail" :alt="article.title">
-      </nuxt-link>
-    </div>
+    <img class="img" :src="item.thumbnail" :alt="item.title">
+    <nuxt-content :document="item" />
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return { articles: [] };
-  },
-
-  async fetch() {
-    this.articles = await this.$content('blog').fetch();
+  async asyncData({ $content, route }) {
+    const item = await $content('blog', route.params.slug).fetch();
+    return { item };
   },
 };
 </script>
@@ -58,7 +48,12 @@ export default {
   }
 }
 .img {
-  max-width: 100%;
+  max-width: 400px;
   width: 100%;
+  margin-bottom: 30px;
+}
+.link {
+  margin-bottom: 30px;
+  display: block;
 }
 </style>
