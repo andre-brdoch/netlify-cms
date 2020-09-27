@@ -8,9 +8,9 @@
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link class="navlink" to="/admin">
+          <a class="navlink" href="/admin">
             Edit Content
-          </nuxt-link>
+          </a>
         </li>
       </ul>
     </nav>
