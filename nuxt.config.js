@@ -33,6 +33,8 @@ export default {
 
   content: { dir: '_posts' },
 
+  plugins: [ '@/plugins/cld' ],
+
   build: {
     extend(config, ctx) {
       // Run ESLint on save

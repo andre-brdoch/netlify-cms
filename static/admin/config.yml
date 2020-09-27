@@ -6,6 +6,7 @@ local_backend: true
 publish_mode: editorial_workflow
 media_library:
   name: cloudinary
+  output_filename_only: true
   config:
     cloud_name: kisi-kloud
     api_key: 289736137856832

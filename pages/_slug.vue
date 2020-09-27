@@ -6,7 +6,8 @@
     <img class="img" :src="item.thumbnail" :alt="item.title">
     <nuxt-content :document="item" />
     <div v-if="item.author" class="author-box">
-      <img :src="item.author.img" :alt="item.author.name">
+      <img class="authorimg" :src="item.author.img" :alt="item.author.name">
+
       <div>
         <p>{{ item.author.name }}</p>
         <p>{{ item.author.job }}</p>
@@ -58,6 +59,10 @@ export default {
   max-width: 400px;
   width: 100%;
   margin-bottom: 30px;
+}
+.authorimg {
+  max-width: 100px;
+  width: 100%;
 }
 .link {
   margin-bottom: 30px;
