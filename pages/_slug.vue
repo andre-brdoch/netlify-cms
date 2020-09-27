@@ -19,7 +19,6 @@
 export default {
   async asyncData({ $content, route }) {
     const item = await $content('blog', route.params.slug).fetch();
-    console.log(item.author);
     const authors = await $content('authors').fetch();
     const author = authors.find(author => author.name === item.author);
     if (author) item.author = author;

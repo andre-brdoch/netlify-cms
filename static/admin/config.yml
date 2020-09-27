@@ -4,6 +4,11 @@ backend:
   squash_merges: true
 local_backend: true
 publish_mode: editorial_workflow
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: kisi-kloud
+    api_key: 289736137856832
 media_folder: 'static/images/uploads'
 public_folder: '/images/uploads'
 collections:
