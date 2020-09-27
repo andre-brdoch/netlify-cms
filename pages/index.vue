@@ -15,6 +15,9 @@
         <div
           class="img"
           :style="`background-image: url('${article.thumbnail}');`" />
+        <p v-if="article.author" class="author">
+          By {{ article.author.name }}
+        </p>
       </nuxt-link>
     </div>
   </div>
@@ -27,7 +30,13 @@ export default {
   },
 
   async fetch() {
-    this.articles = await this.$content('blog').fetch();
+    const articles = await this.$content('blog').fetch();
+    const authors = await this.$content('authors').fetch();
+    articles.forEach(a => {
+      if (a.author) a.author = authors.find(author => author.name === a.author);
+    });
+
+    this.articles = articles;
   },
 };
 </script>
@@ -68,5 +77,10 @@ export default {
     display: block;
     padding-top: 55%;
   }
+}
+
+.author {
+  margin-top: 10px;
+  text-align: right;
 }
 </style>
